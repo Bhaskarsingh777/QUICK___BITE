@@ -197,6 +197,9 @@ def checkout():
     total = sum(v["price"] * v["quantity"] for v in cart.values())
     return render_template("checkout.html", total=total)
 
+from io import BytesIO
+import base64
+
 # ---------------- PAYMENT ----------------
 @app.route("/payment", methods=["POST"])
 def payment():
@@ -208,13 +211,15 @@ def payment():
     total = float(request.form["total"])
 
     upi_link = f"upi://pay?pa=9871209052@yapl&pn=Quick Bite&am={total}&cu=INR"
+
     img = qrcode.make(upi_link)
 
-    if not os.path.exists("static"):
-        os.makedirs("static")
+    # Convert image to base64 (no file saving)
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    qr_code = base64.b64encode(buffered.getvalue()).decode()
 
-    img.save("static/qr.png")
-    return render_template("payment.html", total=total)
+    return render_template("payment.html", total=total, qr_code=qr_code)
 
 # ---------------- CONFIRM PAYMENT ----------------
 @app.route("/confirm_payment", methods=["POST"])
