@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart | QUICK BITE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/foodstyle.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h1 class="nav-brand">QUICK BITE</h1>
+    <a href="{{ url_for('home') }}">
+        <button>⬅ Back to Menu</button>
+    </a>
+</nav>
+
+<section class="menu-section">
+    <h2 class="menu-heading">Your Cart</h2>
+
+    {% if cart %}
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Price (₹)</th>
+            <th>Qty</th>
+            <th>Total (₹)</th>
+            <th>Action</th>
+        </tr>
+
+        {% for item, details in cart.items() %}
+        <tr class="box">
+            <td>{{ item }}</td>
+            <td>{{ details.price }}</td>
+
+            <td>
+                <a href="{{ url_for('update_quantity', item=item, action='decrease') }}">
+                    <button class="qty-btn">-</button>
+                </a>
+
+                {{ details.quantity }}
+
+                <a href="{{ url_for('update_quantity', item=item, action='increase') }}">
+                    <button class="qty-btn">+</button>
+                </a>
+            </td>
+
+            <td>{{ details.price * details.quantity }}</td>
+
+            <td>
+                <a href="{{ url_for('remove_item', item=item) }}">
+                    <button class="remove-btn">Remove</button>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3 style="text-align:center; margin-top:25px; color: #333;">
+        Total Amount: ₹{{ total }}
+    </h3>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="{{ url_for('checkout') }}">
+            <button>Proceed to Checkout</button>
+        </a>
+    </div>
+
+    {% else %}
+    <p class="empty-cart">Your cart is empty 😕</p>
+    {% endif %}
+</section>
+
+</body>
+</html>

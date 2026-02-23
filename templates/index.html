@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style/foodstyle.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <title>QUICK BITE — Food Website</title>
+  </head>
+
+  <!-- ✅ FIX ADDED HERE -->
+  <body data-logged-in="{{ 'True' if 'user' in session else 'False' }}"></body>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <h1 class="nav-brand">QUICK BITE</h1>
+      </div>
+
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="hamburger">
+        <i class="fas fa-bars"></i>
+      </label>
+
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search food..." />
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#specials">Specials</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="{{ url_for('admin_login') }}">Admin</a></li>
+      </ul>
+
+      <div class="nav-buttons">
+        {% if 'user' in session %}
+        <a href="{{ url_for('cart') }}">
+          <button>Cart</button>
+        </a>
+
+        <a href="{{ url_for('track_orders') }}">
+          <button>Track Order</button>
+        </a>
+
+        <span style="margin-right: 10px; color: white">
+          Welcome, {{ session['user'] }}
+        </span>
+
+        <a href="{{ url_for('logout') }}">
+          <button>Logout</button>
+        </a>
+        {% else %}
+        <button id="loginBtn">Login</button>
+        <button id="signupBtn">Sign Up</button>
+        {% endif %}
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header id="home" class="main">
+      <div class="video-container">
+        <video autoplay muted loop playsinline>
+          <source src="" type="video/mp4" />
+        </video>
+        <div class="video-text">
+          Swad se bhara har plate, <br />
+          Quick Bite is your faith!
+        </div>
+      </div>
+    </header>
+
+    <!-- MENU -->
+    <section id="menu" class="menu-section">
+      <h2 class="menu-heading">Our Menu</h2>
+
+      <!-- Items grid -->
+      <div class="items">
+        <!-- Example item card structure repeated for each menu item -->
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/pizza.jpg') }}"
+            alt="Pizza"
+          />
+          <h4>Pizza</h4>
+          <p class="price">₹200</p>
+          <button class="orderBtn" data-item="Pizza" data-price="200">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/pasta.jpg') }}"
+            alt="Pasta"
+          />
+          <h4>Pasta</h4>
+          <p class="price">₹170</p>
+          <button class="orderBtn" data-item="Pasta" data-price="170">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/vegburger.jpg') }}"
+            alt="Veggie Burger"
+          />
+          <h4>Veggie Burger</h4>
+          <p class="price">₹120</p>
+          <button class="orderBtn" data-item="Veggie Burger" data-price="120">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/dumplings.jpg') }}"
+            alt="Dumplings"
+          />
+          <h4>Dumplings</h4>
+          <p class="price">₹129</p>
+          <button class="orderBtn" data-item="Dumplings" data-price="129">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/honeychillipotato.jpg') }}"
+            alt="Honey Chilli Potato"
+          />
+          <h4>Honey Chilli Potato</h4>
+          <p class="price">₹159</p>
+          <button
+            class="orderBtn"
+            data-item="Honey Chilli Potato"
+            data-price="159"
+          >
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/paneertikka.jpg') }}"
+            alt="Paneer Tikka"
+          />
+          <h4>Paneer Tikka</h4>
+          <p class="price">₹250</p>
+          <button class="orderBtn" data-item="Paneer Tikka" data-price="250">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/dahiksholey.jpg') }}"
+            alt="Dahi ke Sholey"
+          />
+          <h4>Dahi ke Sholey</h4>
+          <p class="price">₹179</p>
+          <button class="orderBtn" data-item="Dahi ke Sholey" data-price="179">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/noodles.jpg') }}"
+            alt="Noodles"
+          />
+          <h4>Noodles</h4>
+          <p class="price">₹149</p>
+          <button class="orderBtn" data-item="Noodles" data-price="149">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/dalmakhani.jpg') }}"
+            alt="Dal Makhani"
+          />
+          <h4>Dal Makhani</h4>
+          <p class="price">₹200</p>
+          <button class="orderBtn" data-item="Dal Makhani" data-price="200">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/masalabhindi.jpg') }}"
+            alt="Masala Bhindi"
+          />
+          <h4>Masala Bhindi</h4>
+          <p class="price">₹135</p>
+          <button class="orderBtn" data-item="Masala Bhindi" data-price="135">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/kadaipaneer.jpg') }}"
+            alt="Kadai Paneer"
+          />
+          <h4>Kadai Paneer</h4>
+          <p class="price">₹270</p>
+          <button class="orderBtn" data-item="Kadai Paneer" data-price="270">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/soya.jpg') }}"
+            alt="Soya Chaap"
+          />
+          <h4>Soya Chaap</h4>
+          <p class="price">₹189</p>
+          <button class="orderBtn" data-item="Soya Chaap" data-price="189">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/veg_biryani.jpg') }}"
+            alt="Veg Biryani"
+          />
+          <h4>Veg Biryani</h4>
+          <p class="price">₹220</p>
+          <button class="orderBtn" data-item="Veg Biryani" data-price="220">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/jeerarice.jpg') }}"
+            alt="Jeera Rice"
+          />
+          <h4>Jeera Rice</h4>
+          <p class="price">₹150</p>
+          <button class="orderBtn" data-item="Jeera Rice" data-price="150">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/garlicroti.jpg') }}"
+            alt="Garlic Naan"
+          />
+          <h4>Garlic Naan</h4>
+          <p class="price">₹69</p>
+          <button class="orderBtn" data-item="Garlic Naan" data-price="69">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/Tandoriroti.jpg') }}"
+            alt="Tandori Roti"
+          />
+          <h4>Tandori Roti</h4>
+          <p class="price">₹25</p>
+          <button class="orderBtn" data-item="Tandori Roti" data-price="25">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/lachhaparatha.jpg') }}"
+            alt="Lachha Paratha"
+          />
+          <h4>Lachha Paratha</h4>
+          <p class="price">₹35</p>
+          <button class="orderBtn" data-item="Lachha Paratha" data-price="35">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/butter_roti.jpg') }}"
+            alt="Butter Roti"
+          />
+          <h4>Butter Roti</h4>
+          <p class="price">₹20</p>
+          <button class="orderBtn" data-item="Butter Roti" data-price="20">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/lassi.jpg') }}"
+            alt="Masala Lassi"
+          />
+          <h4>Masala Lassi</h4>
+          <p class="price">₹100</p>
+          <button class="orderBtn" data-item="Masala Lassi" data-price="100">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/Gajar_Halwa.jpg') }}"
+            alt="Gajar Halwa"
+          />
+          <h4>Gajar Halwa</h4>
+          <p class="price">₹79</p>
+          <button class="orderBtn" data-item="Gajar Halwa" data-price="79">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/gulab_jaamun.jpg') }}"
+            alt="Gulaab Jaamun"
+          />
+          <h4>Gulaab Jaamun</h4>
+          <p class="price">₹49</p>
+          <button class="orderBtn" data-item="Gulaab Jaamun" data-price="49">
+            ORDER
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIALS / PRICE BOXES -->
+    <!-- MENU -->
+    <section id="specials" class="menu-section">
+      <h2 class="menu-heading">SPECIAL</h2>
+
+      <!-- Items grid -->
+      <div class="items">
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/combo1.jpg') }}"
+            alt="combo1"
+          />
+          <h4>Burger + Fries + Cold Drink</h4>
+          <p class="price">₹199</p>
+          <button
+            class="orderBtn"
+            data-item="Burger + Fries + Cold Drink"
+            data-price="199"
+          >
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/combo2.jpg') }}"
+            alt="combo2"
+          />
+          <h4>Family Pack</h4>
+          <p class="price">₹599</p>
+          <button class="orderBtn" data-item="Family Pack" data-price="599">
+            ORDER
+          </button>
+        </div>
+
+        <div class="item">
+          <img
+            src="{{ url_for('static', filename='image/combo3.jpg') }}"
+            alt="combo3"
+          />
+          <h4>Sweet Treat</h4>
+          <p class="price">₹129</p>
+          <button class="orderBtn" data-item="Sweet Treat" data-price="129">
+            ORDER
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="about-section">
+      <div class="about-container">
+        <div class="about-text">
+          <h2 class="c">About Us</h2>
+          <p>
+            QUICK BITE is a leading food discovery and delivery platform that
+            connects people with the best restaurants in their city. Our mission
+            is to bring delicious food right to your doorstep with just a few
+            clicks. We offer a wide range of cuisines, from traditional
+            favorites to modern dishes, all prepared by top-rated chefs and
+            kitchens.
+            <br /><br />
+            We believe in quality, speed, and customer satisfaction. Our
+            easy-to-use platform makes ordering food simple and enjoyable.
+            Whether you're craving a quick snack, a hearty meal, or something
+            healthy, Bhukkad Gully has you covered.
+            <br /><br />
+            With a strong network of delivery partners and trusted restaurants,
+            we ensure your food reaches you fresh and on time. We’re more than
+            just a food app — we’re your daily dining companion. Thank you for
+            making us a part of your life.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- REVIEWS SECTION -->
+    <section id="reviews" class="reviews-section">
+      <h2 class="menu-heading">Customer Reviews</h2>
+
+      <!-- Reviews List -->
+      <div class="reviews-list">
+        {% if reviews %} {% for review in reviews %}
+        <div class="review-card">
+          <h3>{{ review.name }}</h3>
+          <p class="review-msg">"{{ review.message }}"</p>
+          <p class="review-rating">⭐ {{ review.rating }}/5</p>
+        </div>
+        {% endfor %} {% else %}
+        <p class="no-review-text">
+          No reviews yet. Be the first to share your experience!
+        </p>
+        {% endif %}
+      </div>
+
+      <button id="addReviewBtn" class="review-btn">Write a Review</button>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact">
+      <div class="footer-container">
+        <div class="contact-section">
+          <h2>Contact</h2>
+          <ul
+            style="
+              display: flex;
+              justify-content: center;
+              gap: 18px;
+              list-style: none;
+              padding: 0;
+            "
+          >
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+          <div class="social-icons" style="margin-top: 18px">
+            <a href="https://facebook.com" target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="https://twitter.com" target="_blank"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="https://github.com/bhaskarsingh777" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a href="https://instagram.com/bhaskar_singh777" target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://linkedin.com/in/bhaskar-singh-593bbb277?"
+              target="_blank"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </div>
+
+          <p style="margin-top: 14px">
+            &copy; 2025 QUICK BITE. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modals" aria-hidden="true">
+      <div class="modal-contents">
+        <span class="close" id="closeLogin">&times;</span>
+        <h2>Login</h2>
+        <form action="{{ url_for('login') }}" method="POST">
+          <input type="email" name="email" placeholder="Email" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Login</button>
+        </form>
+        <p class="switch-form" id="toSignup">Don't have an account? Sign Up</p>
+      </div>
+    </div>
+
+    <!-- SIGNUP MODAL -->
+    <div id="signupModal" class="modals" aria-hidden="true">
+      <div class="modal-contents">
+        <span class="close" id="closeSignup">&times;</span>
+        <h2>Sign Up</h2>
+        <form action="{{ url_for('signup') }}" method="POST">
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+        <p class="switch-form" id="toLogin">Already have an account? Login</p>
+      </div>
+    </div>
+
+    <!-- ORDER MODAL -->
+    <div id="orderModal" class="modal" aria-hidden="true">
+      <div class="modal-content">
+        <span class="close" id="closeOrder">&times;</span>
+        <h2>Place Your Order</h2>
+
+        <form
+          id="orderForm"
+          action="{{ url_for('add_to_cart') }}"
+          method="POST"
+        >
+          <input type="hidden" id="orderItem" name="item" />
+          <input type="hidden" id="orderPrice" name="price" />
+
+          <label>Quantity</label>
+          <input type="number" name="quantity" value="1" min="1" required />
+
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+    </div>
+    <!-- REVIEW MODAL -->
+    <div id="reviewModal" class="modals" aria-hidden="true">
+      <div class="modal-contents">
+        <span class="close" id="closeReview">&times;</span>
+        <h2>Write Your Review</h2>
+
+        <form action="{{ url_for('review') }}" method="POST">
+          <input type="text" name="name" placeholder="Your Name" required />
+
+          <textarea
+            name="message"
+            placeholder="Your Feedback"
+            required
+          ></textarea>
+
+          <label style="color: white">Rating:</label>
+          <select name="rating" required>
+            <option value="5">⭐ 5 - Excellent</option>
+            <option value="4">⭐ 4 - Good</option>
+            <option value="3">⭐ 3 - Average</option>
+            <option value="2">⭐ 2 - Poor</option>
+            <option value="1">⭐ 1 - Bad</option>
+          </select>
+
+          <button type="submit">Submit Review</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS -->
+      <script src="{{ url_for('static', filename='script/foodscript.js') }}"></script>
+  </body>
+</html>

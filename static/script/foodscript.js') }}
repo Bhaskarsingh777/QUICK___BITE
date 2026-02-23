@@ -1,0 +1,7 @@
+const reviewModal = document.getElementById("reviewModal");
+const addReviewBtn = document.getElementById("addReviewBtn");
+const closeReview = document.getElementById("closeReview");
+
+addReviewBtn.onclick = () => reviewModal.style.display = "block";
+closeReview.onclick = () => reviewModal.style.display = "none";
+window.onclick = (e) => { if (e.target == reviewModal) reviewModal.style.display = "none"; }

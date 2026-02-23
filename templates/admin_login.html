@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/foodstyle.css') }}">
+</head>
+<body>
+  <div class="admin-login-container">
+    <h2>Admin Login</h2>
+    <form method="POST" action="{{ url_for('admin_login') }}">
+      <input type="text" name="username" placeholder="Admin Username" required>
+      <input type="password" name="password" placeholder="Admin Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <p><a class="back-to-home" href="{{ url_for('home') }}">Back to Home</a></p>
+  </div>
+</body>
+</html>

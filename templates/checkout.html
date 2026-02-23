@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout | QUICK BITE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/foodstyle.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <h1 class="nav-brand">QUICK BITE</h1>
+
+    <div>
+        <a href="{{ url_for('cart') }}">
+            <button>⬅ Back to Cart</button>
+        </a>
+    </div>
+</nav>
+
+<section class="menu_section">
+    <div>
+
+        <h2 class="menu-heading">Checkout</h2>
+
+        <div style="text-align:center; margin-bottom:20px;">
+            <p><strong>Payment Method:</strong> Online (UPI / Card)</p>
+            <h3 style="color:black;">Total Payable: ₹{{ total }}</h3>
+        </div>
+
+        <form action="{{ url_for('payment') }}" method="POST">
+
+            <input type="hidden" name="total" value="{{ total }}">
+
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+
+            <label>Delivery Address</label>
+            <textarea name="address" rows="4" required style="width:100%"></textarea>
+
+            <label>Phone Number</label>
+            <input type="tel" name="phone" required>
+
+            <button type="submit" style="margin-top:20px; width:100%;">
+                Proceed to Payment
+            </button>
+
+        </form>
+
+    </div>
+</section>
+
+</body>
+</html>

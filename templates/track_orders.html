@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Track My Orders</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style/foodstyle.css') }}"
+    />
+  </head>
+
+  <body class="track-page">
+    <nav class="navbar">
+      <h1 class="nav-brand">QUICK BITE</h1>
+      <a href="{{ url_for('home') }}">
+        <button>⬅ Back to Home</button>
+      </a>
+    </nav>
+
+    <h2 class="track-title">📦 Track Your Orders</h2>
+
+    {% if orders %} {% for order in orders %}
+
+    <div class="order-track-card">
+      <!-- Item + Quantity -->
+      <h3>{{ order[1] }} x {{ order[3] }}</h3>
+
+      <!-- Total -->
+      <p>Total: ₹{{ order[6] }}</p>
+
+      <!-- Status Progress -->
+      <div class="status-bar">
+        <span class="dot {% if order[7]=='Preparing' %}active{% endif %}"
+          >🟡</span
+        >
+        <span class="dot {% if order[7]=='On Route' %}active{% endif %}"
+          >🟠</span
+        >
+        <span class="dot {% if order[7]=='Delivered' %}active{% endif %}"
+          >🟢</span
+        >
+      </div>
+
+      <p class="status-text">Status: <strong>{{ order[7] }}</strong></p>
+    </div>
+
+    {% endfor %} {% else %}
+
+    <p style="text-align: center; color: black">No orders found 🙁</p>
+    {% endif %}
+  </body>
+</html>

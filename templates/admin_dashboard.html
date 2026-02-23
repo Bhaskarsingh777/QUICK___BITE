@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard | QUICK BITE</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style/foodstyle.css') }}"
+    />
+  </head>
+  <body class="admin-dashboard">
+    <h1>Welcome, Admin</h1>
+    <a href="{{ url_for('admin_logout') }}"><button>Logout</button></a>
+
+    <h2>Registered Users</h2>
+    <table border="1" cellpadding="5">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ user[1] }}</td>
+        <td>{{ user[2] }}</td>
+        <td>
+          <form
+            method="POST"
+            action="{{ url_for('delete_user', user_id=user[0]) }}"
+          >
+            <button
+              type="submit"
+              onclick="return confirm('Delete this user?');"
+            >
+              Delete
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h2>Orders</h2>
+    <table cellpadding="8">
+      <tr>
+        <th>ID</th>
+        <th>Item</th>
+        <th>Name</th>
+        <th>Qty</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+
+      {% for order in orders %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ order[1] }}</td>
+        <td>{{ order[2] }}</td>
+        <td>{{ order[3] }}</td>
+        <td>{{ order[4] }}</td>
+        <td>{{ order[5] }}</td>
+        <td><strong>{{ order[6] }}</strong></td>
+
+        <!-- 🔥 STATUS UPDATE BUTTONS -->
+        <td>
+          <form
+            action="{{ url_for('update_status', order_id=order[0]) }}"
+            method="POST"
+            class="status-form"
+          >
+            <button
+              name="status"
+              value="Preparing"
+              class="status-btn preparing"
+              title="Preparing"
+            >
+              🟡
+            </button>
+            <button
+              name="status"
+              value="On Route"
+              class="status-btn onroute"
+              title="On Route"
+            >
+              🟠
+            </button>
+            <button
+              name="status"
+              value="Delivered"
+              class="status-btn delivered"
+              title="Delivered"
+            >
+              🟢
+            </button>
+          </form>
+
+          <!-- ❌ Delete order -->
+          <form
+            method="POST"
+            action="{{ url_for('delete_order', order_id=order[0]) }}"
+          >
+            <button
+              type="submit"
+              class="delete-btn"
+              onclick="return confirm('Delete this order?');"
+            >
+              🗑
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

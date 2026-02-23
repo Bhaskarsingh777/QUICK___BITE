@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan & Pay | QUICK BITE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/foodstyle.css') }}">
+</head>
+
+<body class="payment-page">
+
+    <div class="payment-container">
+
+        <h2 class="payment-title">Scan QR to Pay ₹{{ total }}</h2>
+
+        <div class="qr-card">
+            <img src="{{ url_for('static', filename='qr.png') }}" class="qr-image">
+
+            <p class="upi-text">
+                UPI ID: <strong>9871209052@yapl</strong>
+            </p>
+
+            <p class="note-text">
+                Scan using PhonePe, Google Pay, Paytm etc.
+            </p>
+        </div>
+
+        <!-- Payment Button -->
+        <form id="paymentForm">
+            <button type="submit" class="paid-btn">
+                I Have Paid
+            </button>
+        </form>
+
+    </div>
+
+    <!-- SUCCESS POPUP -->
+    <div id="successPopup" class="popup">
+        <div class="popup-content">
+            <h3>✅ Payment Successful!</h3>
+            <p>Your order has been confirmed.</p>
+            <a href="{{ url_for('home') }}">
+            <button class="home-btn">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+     <script src="{{ url_for('static', filename='script/foodscript.js') }}"></script>
+
+
+
+</body>
+</html>
