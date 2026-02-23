@@ -12,8 +12,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const signupModal = document.getElementById("signupModal");
     const orderModal = document.getElementById("orderModal");
     const reviewModal = document.getElementById("reviewModal");
+    const paymentPopup = document.getElementById("paymentPopup");
 
-    // Buttons
+    // ===========================
+    // BUTTONS
+    // ===========================
     const loginBtn = document.getElementById("loginBtn");
     const signupBtn = document.getElementById("signupBtn");
     const closeLogin = document.getElementById("closeLogin");
@@ -21,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeOrder = document.getElementById("closeOrder");
     const closeReview = document.getElementById("closeReview");
     const addReviewBtn = document.getElementById("addReviewBtn");
+    const paidBtn = document.querySelector(".paid-btn");
 
     const toSignup = document.getElementById("toSignup");
     const toLogin = document.getElementById("toLogin");
@@ -103,6 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
     closeReview?.addEventListener("click", () => hideModal(reviewModal));
 
     // ===========================
+    // PAYMENT POPUP
+    // ===========================
+    paidBtn?.addEventListener("click", () => {
+        showModal(paymentPopup);
+    });
+
+    // ===========================
     // CLICK OUTSIDE TO CLOSE
     // ===========================
     window.addEventListener("click", (e) => {
@@ -110,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.target === signupModal) hideModal(signupModal);
         if (e.target === orderModal) hideModal(orderModal);
         if (e.target === reviewModal) hideModal(reviewModal);
+        if (e.target === paymentPopup) hideModal(paymentPopup);
     });
 
     // ===========================
@@ -129,27 +141,5 @@ document.addEventListener("DOMContentLoaded", function () {
             item.style.display = name.includes(value) ? "block" : "none";
         });
     });
-
-    // ===========================
-    // PAYMENT POPUP (NEW SECTION)
-    // ===========================
-    const paymentForm = document.getElementById("paymentForm");
-    const successPopup = document.getElementById("successPopup");
-
-    if (paymentForm) {
-        paymentForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            fetch("/confirm_payment", {
-                method: "POST"
-            })
-            .then(response => response.text())
-            .then(() => {
-                if (successPopup) {
-                    successPopup.style.display = "flex";
-                }
-            });
-        });
-    }
 
 });
