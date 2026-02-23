@@ -202,7 +202,6 @@ def checkout():
 from io import BytesIO
 import base64
 
-# ---------------- PAYMENT ----------------
 @app.route("/payment", methods=["POST"])
 def payment():
     if "user" not in session:
@@ -216,7 +215,6 @@ def payment():
 
     img = qrcode.make(upi_link)
 
-    # Convert image to base64 (no file saving)
     buffered = BytesIO()
     img.save(buffered, format="PNG")
     qr_code = base64.b64encode(buffered.getvalue()).decode()
