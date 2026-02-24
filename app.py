@@ -254,12 +254,16 @@ def confirm_payment():
     cur.close()
     con.close()
 
-    # 🔥 Clear cart completely
+    # Clear cart
     session.pop("cart", None)
-    session.modified = True
 
-    flash("✅ Payment Successful – Order Confirmed")
-    return redirect(url_for("home"))
+    # Return to payment page with success flag
+    return render_template(
+        "payment.html",
+        total=0,
+        qr_code=None,
+        payment_success=True
+    )
 
 # ---------------- TRACK ORDERS ----------------
 @app.route("/track_orders")

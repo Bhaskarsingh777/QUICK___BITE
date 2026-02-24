@@ -1,44 +1,69 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <title>Scan & Pay | QUICK BITE</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style/foodstyle.css') }}"
-    />
-  </head>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style/foodstyle.css') }}">
+</head>
 
-  <body class="payment-page">
-    <div class="payment-container">
-      <h2 class="payment-title">Scan QR to Pay ₹{{ total }}</h2>
+<body class="payment-page">
 
-      <div class="qr-card">
-        <!-- Dynamic QR Code -->
-        <img src="data:image/png;base64,{{ qr_code }}" class="qr-image" />
+<div class="payment-container">
 
-        <p class="upi-text">UPI ID: <strong>9871209052@yapl</strong></p>
+    <h2 class="payment-title">
+        Scan QR to Pay ₹{{ total }}
+    </h2>
 
-        <p class="note-text">Scan using PhonePe, Google Pay, Paytm etc.</p>
-      </div>
+    <!-- QR SECTION -->
+    <div class="qr-card">
 
-      <!-- Payment Button -->
-      <form action="{{ url_for('confirm_payment') }}" method="POST">
-        <button type="submit" class="paid-btn">I Have Paid</button>
-      </form>
+        {% if qr_code %}
+            <img src="data:image/png;base64,{{ qr_code }}"
+                 class="qr-image" />
+        {% else %}
+            <h3 style="color:green;">🎉 Order Confirmed Successfully!</h3>
+        {% endif %}
+
+        <p class="upi-text">
+            UPI ID: <strong>9871209052@yapl</strong>
+        </p>
+
+        <p class="note-text">
+            Scan using PhonePe, Google Pay, Paytm etc.
+        </p>
+
     </div>
 
-    <!-- Popup -->
-    <div id="paymentPopup" class="popup">
-      <div class="popup-content">
+    <!-- PAYMENT BUTTON -->
+    {% if not payment_success %}
+    <form action="{{ url_for('confirm_payment') }}" method="POST">
+        <button type="submit" class="paid-btn">
+            I Have Paid
+        </button>
+    </form>
+    {% endif %}
+
+</div>
+
+<!-- SUCCESS POPUP -->
+{% if payment_success %}
+<div class="popup show">
+    <div class="popup-content">
         <h3>✅ Payment Successful!</h3>
-        <p>Thank you for your order.</p>
+        <p>Your order has been confirmed.</p>
 
         <a href="{{ url_for('home') }}">
-          <button class="home-btn">Back to Home</button>
+            <button class="home-btn">Back to Home</button>
         </a>
-      </div>
-    </div>
 
-    <script src="{{ url_for('static', filename='script/foodscript.js') }}"></script>
-  </body>
+        <a href="{{ url_for('track_orders') }}">
+            <button class="home-btn">Track Order</button>
+        </a>
+    </div>
+</div>
+{% endif %}
+
+<script src="{{ url_for('static', filename='script/foodscript.js') }}"></script>
+
+</body>
 </html>
