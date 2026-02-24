@@ -54,22 +54,26 @@ This project demonstrates strong backend integration, database management, sessi
 ---
 
 ## 🏠 1. Home Page
-![Home Page](https://github.com/user-attachments/assets/dfcc6801-88b1-4e81-853e-61053b7c9725)
+![Home Page](https://github.com/user-attachments/assets/201c5b23-05f5-4e17-a327-8db4659a7cb7)
 
 ---
 
 ## 🔐 2. Login Page
-![Login Page](https://github.com/user-attachments/assets/f2a7a9c9-52d6-44a8-8513-9ffbbc26dfa6)
+![Login Page](https://github.com/user-attachments/assets/7877381b-34e8-4154-b78c-35223e7eb9b0)
+
 
 ---
 
 ## 📝 3. Signup Page
-![Signup Page](https://github.com/user-attachments/assets/302a33ca-b37b-4e85-9939-be59d128416c)
+![Signup Page](https://github.com/user-attachments/assets/ff08a5ca-e54a-4de2-b424-2a8072a96a42)
 
 ---
 
 ## 🍽️ 4. Menu Page
-![Menu](https://github.com/user-attachments/assets/1454cb1c-48be-47d7-9660-0fa58bd07a28)
+![Menu](https://github.com/user-attachments/assets/e49f7daf-4f67-4f3c-a484-0ed2d0b8a516)
+
+![](https://github.com/user-attachments/assets/85c1059c-fdf6-41f1-a231-aa1f830a5bf2)
+
 
 ---
 
@@ -82,7 +86,8 @@ This project demonstrates strong backend integration, database management, sessi
 ---
 
 ## 📦 6. Order Tracking
-![Tracking Page](https://github.com/user-attachments/assets/cdd4fef0-0531-4667-8d59-da09649671a2)
+![Tracking Page](https://github.com/user-attachments/assets/4697b6ee-b91b-409a-b922-e9dda1857530)
+)
 
 ---
 
