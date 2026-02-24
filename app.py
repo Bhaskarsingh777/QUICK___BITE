@@ -259,6 +259,7 @@ def confirm_payment():
     session.modified = True
 
     flash("✅ Payment Successful – Order Confirmed")
+    return redirect(url_for("home"))
 
 # ---------------- TRACK ORDERS ----------------
 @app.route("/track_orders")
@@ -312,12 +313,27 @@ def admin_dashboard():
     con = get_db_connection()
     cur = con.cursor()
 
+    # Fetch users
     cur.execute("SELECT * FROM users")
     users = cur.fetchall()
 
-    cur.execute("SELECT * FROM orders")
+    # Fetch orders with JOIN
+    cur.execute("""
+        SELECT orders.id,
+               users.name,
+               orders.address,
+               orders.phone,
+               orders.item,
+               orders.quantity,
+               orders.total_price,
+               orders.status
+        FROM orders
+        JOIN users ON orders.user_email = users.email
+        ORDER BY orders.id DESC
+    """)
     orders = cur.fetchall()
 
+    # Fetch total revenue
     cur.execute("SELECT COALESCE(SUM(total_price),0) FROM orders")
     revenue = cur.fetchone()[0]
 
