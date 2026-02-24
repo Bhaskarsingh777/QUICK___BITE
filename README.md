@@ -76,7 +76,7 @@ This project demonstrates strong backend integration, database management, sessi
 ## 🛒 5. Cart Section
 
 
-![Cart Section](![Cart](https://github.com/user-attachments/assets/359cfd42-f621-4c7b-96a6-e7ef6a2c6f4b)
+![Cart Section](https://github.com/user-attachments/assets/359cfd42-f621-4c7b-96a6-e7ef6a2c6f4b)
 )
 
 ---
@@ -88,7 +88,7 @@ This project demonstrates strong backend integration, database management, sessi
 
 ## 👨‍💼 7. Order Confirmation
 
-![Confirmation](![pay](https://github.com/user-attachments/assets/02230b08-967b-470f-b028-d6371df5a94b)
+![Confirmation](https://github.com/user-attachments/assets/02230b08-967b-470f-b028-d6371df5a94b)
 )
 )
 
