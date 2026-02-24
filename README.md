@@ -89,8 +89,7 @@ This project demonstrates strong backend integration, database management, sessi
 ## 👨‍💼 7. Order Confirmation
 
 ![Confirmation](https://github.com/user-attachments/assets/02230b08-967b-470f-b028-d6371df5a94b)
-)
-)
+
 
 ---
 # 🌟 Future Improvements -
