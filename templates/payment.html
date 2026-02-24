@@ -1,49 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Scan & Pay | QUICK BITE</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style/foodstyle.css') }}">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style/foodstyle.css') }}"
+    />
+  </head>
 
-<body class="payment-page">
-
+  <body class="payment-page">
     <div class="payment-container">
+      <h2 class="payment-title">Scan QR to Pay ₹{{ total }}</h2>
 
-        <h2 class="payment-title">Scan QR to Pay ₹{{ total }}</h2>
+      <div class="qr-card">
+        <!-- Dynamic QR Code -->
+        <img src="data:image/png;base64,{{ qr_code }}" class="qr-image" />
 
-        <div class="qr-card">
-            <!-- Dynamic QR Code -->
-            <img src="data:image/png;base64,{{ qr_code }}" class="qr-image">
+        <p class="upi-text">UPI ID: <strong>9871209052@yapl</strong></p>
 
-            <p class="upi-text">
-                UPI ID: <strong>9871209052@yapl</strong>
-            </p>
+        <p class="note-text">Scan using PhonePe, Google Pay, Paytm etc.</p>
+      </div>
 
-            <p class="note-text">
-                Scan using PhonePe, Google Pay, Paytm etc.
-            </p>
-        </div>
-
-        <!-- Payment Button -->
-        <button type="button" class="paid-btn" onclick="showPopup()">
-            I Have Paid
-        </button>
-
+      <!-- Payment Button -->
+      <form action="{{ url_for('confirm_payment') }}" method="POST">
+        <button type="submit" class="paid-btn">I Have Paid</button>
+      </form>
     </div>
 
     <!-- Popup -->
     <div id="paymentPopup" class="popup">
-        <div class="popup-content">
-            <h3>✅ Payment Successful!</h3>
-            <p>Thank you for your order.</p>
+      <div class="popup-content">
+        <h3>✅ Payment Successful!</h3>
+        <p>Thank you for your order.</p>
 
-            <a href="{{ url_for('home') }}">
-                <button class="home-btn">Back to Home</button>
-            </a>
-        </div>
+        <a href="{{ url_for('home') }}">
+          <button class="home-btn">Back to Home</button>
+        </a>
+      </div>
     </div>
 
     <script src="{{ url_for('static', filename='script/foodscript.js') }}"></script>
-
-</body>
+  </body>
 </html>
