@@ -10,65 +10,54 @@
 
 <div class="payment-container">
 
-    <h2 class="payment-title">
-        Scan QR to Pay ₹{{ total }}
-    </h2>
+    {% if not payment_success %}
 
-    <!-- QR SECTION -->
-    <div class="qr-card {% if payment_success %}success-box{% endif %}">
+        <h2 class="payment-title">
+            Scan QR to Pay ₹{{ total }}
+        </h2>
 
-        {% if qr_code %}
+        <div class="qr-card">
             <img src="data:image/png;base64,{{ qr_code }}"
                  class="qr-image" />
-        {% else %}
-            <h3>🎉 Order Confirmed Successfully!</h3>
-        {% endif %}
 
-        <p class="upi-text">
-            UPI ID: <strong>9871209052@yapl</strong>
-        </p>
+            <p class="upi-text">
+                UPI ID: <strong>9871209052@yapl</strong>
+            </p>
 
-        <p class="note-text">
-            Scan using PhonePe, Google Pay, Paytm etc.
-        </p>
+            <p class="note-text">
+                Scan using PhonePe, Google Pay, Paytm etc.
+            </p>
+        </div>
 
-    </div>
+        <form action="{{ url_for('confirm_payment') }}" method="POST">
+            <button type="submit" class="paid-btn">
+                I Have Paid
+            </button>
+        </form>
 
-    <!-- PAYMENT BUTTON -->
-    {% if not payment_success %}
-    <form action="{{ url_for('confirm_payment') }}" method="POST">
-        <button type="submit" class="paid-btn">
-            I Have Paid
-        </button>
-    </form>
+    {% else %}
+
+        <!-- SUCCESS SECTION -->
+        <div class="qr-card success-box">
+
+            <h2 style="color:#28a745;">✅ Payment Successful!</h2>
+            <p>Your order has been confirmed.</p>
+
+            <div style="margin-top:15px;">
+                <a href="{{ url_for('home') }}">
+                    <button class="home-btn">🏠 Back to Home</button>
+                </a>
+
+                <a href="{{ url_for('track_orders') }}">
+                    <button class="home-btn">📦 Track Order</button>
+                </a>
+            </div>
+
+        </div>
+
     {% endif %}
 
 </div>
-
-<!-- SUCCESS POPUP -->
-{% if payment_success %}
-<div class="popup show">
-    <div class="popup-content">
-        <h3>✅ Payment Successful!</h3>
-        <p>Your order has been confirmed.</p>
-
-        <a href="{{ url_for('home') }}">
-            <button class="home-btn">Back to Home</button>
-        </a>
-
-        <a href="{{ url_for('track_orders') }}">
-            <button class="home-btn">Track Order</button>
-        </a>
-    </div>
-</div>
-
-<script>
-    // Hide popup after 2 minutes (120000ms)
-    setTimeout(function() {
-        document.querySelector(".popup").classList.remove("show");
-    }, 120000);
-</script>
-{% endif %}
 
 </body>
 </html>
