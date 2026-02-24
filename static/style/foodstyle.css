@@ -1027,6 +1027,7 @@ background-color:rgb(218, 113, 113);
     font-weight: bold;
 }
 
+/* QR CARD */
 .qr-card {
     background: white;
     padding: 25px;
@@ -1034,8 +1035,16 @@ background-color:rgb(218, 113, 113);
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     width: 300px;
     margin: 0 auto 20px auto;
+    transition: 0.3s ease;
 }
 
+/* ✅ SUCCESS BOX COLOR */
+.success-box {
+    background-color: #d4edda;
+    border: 2px solid #28a745;
+}
+
+/* QR IMAGE */
 .qr-image {
     width: 220px;
     height: 220px;
@@ -1053,6 +1062,7 @@ background-color:rgb(218, 113, 113);
     color: gray;
 }
 
+/* PAYMENT BUTTON */
 .paid-btn {
     padding: 10px 20px;
     background-color: #ff7a3d;
@@ -1070,14 +1080,21 @@ background-color:rgb(218, 113, 113);
 /* ================= POPUP ================= */
 
 .popup {
-    display: none;
+    display: none;               /* Hidden by default */
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.6);
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
+/* ✅ SHOW POPUP WHEN .show CLASS ADDED */
+.popup.show {
+    display: flex;
+}
+
+/* POPUP BOX */
 .popup-content {
     background: white;
     padding: 25px;
@@ -1087,8 +1104,9 @@ background-color:rgb(218, 113, 113);
     animation: fadeIn 0.3s ease-in-out;
 }
 
+/* POPUP BUTTONS */
 .popup-content button {
-    margin-top: 15px;
+    margin: 10px 5px;
     padding: 8px 15px;
     border: none;
     background: #ff7a3d;
@@ -1105,4 +1123,3 @@ background-color:rgb(218, 113, 113);
     from {transform: scale(0.8); opacity: 0;}
     to {transform: scale(1); opacity: 1;}
 }
- 
