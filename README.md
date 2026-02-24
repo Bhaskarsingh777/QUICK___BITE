@@ -88,15 +88,19 @@ This project demonstrates strong backend integration, database management, sessi
 
 ## 👨‍💼 7. Order Confirmation
 
-![Confirmation](![pay](https://github.com/user-attachments/assets/82fc8dae-472a-484f-a323-513651486887)
+![Confirmation](![pay](https://github.com/user-attachments/assets/02230b08-967b-470f-b028-d6371df5a94b)
+)
 )
 
 ---
 # 🌟 Future Improvements -
-💳 Full Online Payment Gateway (Razorpay / Stripe) - 
-📱 Enhanced Mobile Optimization - 
-📊 Advanced Admin Dashboard Analytics - 
-📧 Email Notifications - 
-🧾 Invoice Download System ---
 
-Clone the repository:
+💳 Full Online Payment Gateway (Razorpay / Stripe) - 
+
+📱 Enhanced Mobile Optimization - 
+
+📊 Advanced Admin Dashboard Analytics - 
+
+📧 Email Notifications - 
+
+🧾 Invoice Download System ---
