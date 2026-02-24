@@ -259,7 +259,6 @@ def confirm_payment():
     session.modified = True
 
     flash("✅ Payment Successful – Order Confirmed")
-    return redirect(url_for("track_orders"))
 
 # ---------------- TRACK ORDERS ----------------
 @app.route("/track_orders")
