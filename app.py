@@ -228,6 +228,11 @@ def confirm_payment():
         return redirect(url_for("home"))
 
     cart = session.get("cart", {})
+
+    if not cart:
+        flash("Cart is empty!")
+        return redirect(url_for("home"))
+
     con = get_db_connection()
     cur = con.cursor()
 
@@ -248,9 +253,13 @@ def confirm_payment():
     con.commit()
     cur.close()
     con.close()
-    session.pop("cart", None)
 
-    return "<h2>✅ Payment Successful – Order Confirmed</h2>"
+    # 🔥 Clear cart completely
+    session.pop("cart", None)
+    session.modified = True
+
+    flash("✅ Payment Successful – Order Confirmed")
+    return redirect(url_for("track_orders"))
 
 # ---------------- TRACK ORDERS ----------------
 @app.route("/track_orders")
@@ -376,5 +385,4 @@ def admin_logout():
 
 # ---------------- RUN ----------------
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port)
+    app.run()
