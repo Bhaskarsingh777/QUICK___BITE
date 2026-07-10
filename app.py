@@ -13,7 +13,7 @@ app.secret_key = os.environ.get("SECRET_KEY", "super_secret_key")
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if not DATABASE_URL:
-    DATABASE_URL = "postgresql://food_ec3y_user:BpyKFtoE18uT619ywd0FUPpu5dR6lyx7@dpg-d98hqnt8nd3s73ccvq7g-a.singapore-postgres.render.com/food_ec3y"
+    DATABASE_URL = "postgresql://food_ec3y_user:BpyKFtoE18uT619ywd0FUPpu5dR6lyx7@dpg-d98hqnt8nd3s73ccvq7g-a/food_ec3y"
 
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
